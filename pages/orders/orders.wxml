@@ -1,0 +1,51 @@
+<!--pages/orders/orders.wxml-->
+<navigation-bar title="我的订单" back="{{true}}" color="black" background="#F5F6F8"></navigation-bar>
+
+<scroll-view class="page-scroll" scroll-y type="list">
+  <view wx:if="{{loading}}" class="state">
+    <text class="muted">加载中…</text>
+  </view>
+
+  <view wx:elif="{{orders.length === 0}}" class="empty">
+    <text class="empty-icon">🧾</text>
+    <text class="muted">还没有订单，扫码开箱后这里会有记录</text>
+    <view class="btn ghost small" hover-class="hover" bindtap="goHome">
+      <text>去扫码</text>
+    </view>
+  </view>
+
+  <block wx:else>
+    <view class="page-pad">
+      <view
+        wx:for="{{orders}}"
+        wx:key="orderId"
+        class="order-card"
+        data-id="{{item.orderId}}"
+        hover-class="hover"
+        bindtap="openDetail"
+      >
+        <view class="row-between">
+          <text class="order-box ellipsis">{{item.boxName}}</text>
+          <text class="tag {{item.tagClass}}">{{item.statusText}}</text>
+        </view>
+
+        <view class="order-summary">
+          <text class="ellipsis">{{item.summary}}</text>
+        </view>
+
+        <view class="row-between order-foot">
+          <text class="order-time">{{item.timeText}}</text>
+          <text class="price">¥{{item.totalYuan}}</text>
+        </view>
+
+        <view wx:if="{{item.canReopen}}" class="order-actions">
+          <view class="btn small" hover-class="hover" data-id="{{item.orderId}}" catchtap="onReopen">
+            <text>重新开门</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="safe-bottom"></view>
+    </view>
+  </block>
+</scroll-view>

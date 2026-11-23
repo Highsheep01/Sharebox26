@@ -1,0 +1,139 @@
+<!--pages/box/box.wxml-->
+<navigation-bar title="{{box ? box.name : '盒子详情'}}" back="{{true}}" color="black" background="#F5F6F8"></navigation-bar>
+
+<view class="page">
+  <scroll-view class="page-scroll" scroll-y type="list">
+    <view wx:if="{{loading}}" class="state">
+      <text class="state-icon">📡</text>
+      <text class="muted">正在识别盒子…</text>
+    </view>
+
+    <view wx:elif="{{error}}" class="state">
+      <text class="state-icon">🔒</text>
+      <text class="muted">{{error}}</text>
+      <view class="btn ghost small retry" hover-class="hover" bindtap="onReload">
+        <text>重新识别</text>
+      </view>
+    </view>
+
+    <block wx:else>
+      <view class="page-pad">
+        <view class="box-info">
+          <view class="row-between">
+            <text class="box-name">{{box.name}}</text>
+            <text class="tag {{box.status === 'online' ? 'green' : 'gray'}}">
+              {{box.status === 'online' ? '在线' : (directUnlock ? '离线' : '维护中')}}
+            </text>
+          </view>
+          <view class="box-addr">
+            <text>{{box.address}}</text>
+          </view>
+          <view class="box-code">
+            <text>盒子编号 {{box.boxCode}} · 设备号 {{box.deviceId}}</text>
+          </view>
+        </view>
+
+        <view class="notice {{box.status === 'online' ? '' : 'notice-error'}}">
+          <text>{{box.status === 'online' ? box.notice : (directUnlock ? '盒子当前离线，暂时无法开锁' : '盒子当前离线，暂时无法下单')}}</text>
+        </view>
+
+        <view wx:if="{{directUnlock && phase}}" class="status-card">
+          <text class="status-icon">{{icon}}</text>
+          <text class="status-title {{titleClass}}">{{title}}</text>
+          <text class="status-desc">{{desc}}</text>
+          <text wx:if="{{failReason}}" class="status-reason">{{failReason}}</text>
+        </view>
+
+        <view wx:if="{{!directUnlock}}" class="section-title">
+          <text>盒内商品</text>
+        </view>
+
+        <view wx:if="{{!directUnlock}}" class="goods-list">
+          <view
+            wx:for="{{goods}}"
+            wx:key="goodsId"
+            class="goods-item {{item.stock === 0 ? 'goods-out' : ''}} {{item.last ? 'goods-item-last' : ''}}"
+          >
+            <view class="goods-avatar" style="background: {{item.avatarBg}};">
+              <text>{{item.initial}}</text>
+            </view>
+
+            <view class="col goods-main">
+              <view class="goods-name-row">
+                <text class="goods-name ellipsis">{{item.name}}</text>
+                <text wx:if="{{item.tag}}" class="tag">{{item.tag}}</text>
+              </view>
+              <view class="goods-desc">
+                <text class="ellipsis">{{item.desc}}</text>
+              </view>
+              <view class="goods-bottom">
+                <view class="row">
+                  <text class="price-symbol price">¥</text>
+                  <text class="price">{{item.priceYuan}}</text>
+                  <text wx:if="{{item.stock === 0}}" class="stock-out">缺货</text>
+                  <text wx:elif="{{item.stock <= 5}}" class="stock-few">仅剩 {{item.stock}} 件</text>
+                  <text wx:else class="stock">库存 {{item.stock}}</text>
+                </view>
+
+                <view wx:if="{{item.stock === 0}}" class="out-flag">
+                  <text>已售罄</text>
+                </view>
+                <view wx:else class="stepper">
+                  <view
+                    class="step {{item.count > 0 ? '' : 'step-disabled'}}"
+                    data-index="{{index}}"
+                    hover-class="hover"
+                    bindtap="onMinus"
+                  >
+                    <text>−</text>
+                  </view>
+                  <text class="step-count">{{item.count}}</text>
+                  <view
+                    class="step step-solid {{item.count >= item.stock ? 'step-disabled' : ''}}"
+                    data-index="{{index}}"
+                    hover-class="hover"
+                    bindtap="onPlus"
+                  >
+                    <text>+</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="safe-bottom"></view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view wx:if="{{!loading && !error && directUnlock && phase}}" class="footer footer-unlock safe-bottom">
+    <view wx:if="{{phase === 'unlocking'}}" class="btn block disabled">
+      <text>正在向电磁锁发送开锁信号…</text>
+    </view>
+    <view wx:elif="{{phase === 'opened'}}" class="btn block disabled">
+      <text>锁已收回</text>
+    </view>
+    <view wx:elif="{{phase === 'failed'}}" class="btn block" hover-class="hover" bindtap="onRetryUnlock">
+      <text>重新开锁</text>
+    </view>
+  </view>
+
+  <view wx:elif="{{!loading && !error}}" class="footer safe-bottom">
+    <view class="col footer-info">
+      <view class="row">
+        <text class="footer-label">合计</text>
+        <text class="price-symbol price">¥</text>
+        <text class="price footer-price">{{totalYuan}}</text>
+      </view>
+      <text class="footer-count">已选 {{totalCount}} 件</text>
+    </view>
+    <view
+      class="btn footer-btn {{canSubmit ? '' : 'disabled'}}"
+      hover-class="hover"
+      bindtap="onSubmit"
+    >
+      <text>{{submitText}}</text>
+    </view>
+  </view>
+</view>

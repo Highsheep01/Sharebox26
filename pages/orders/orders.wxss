@@ -1,0 +1,59 @@
+/**pages/orders/orders.wxss**/
+.page-pad {
+  padding: 24rpx 24rpx 0;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+
+.empty .btn {
+  margin-top: 36rpx;
+}
+
+.tag.red {
+  color: var(--danger);
+  background-color: rgba(250, 81, 81, 0.12);
+}
+
+.order-card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-box {
+  flex: 1;
+  min-width: 0;
+  margin-right: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.order-summary {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: var(--text-sub);
+}
+
+.order-foot {
+  margin-top: 18rpx;
+}
+
+.order-time {
+  font-size: 22rpx;
+  color: var(--text-weak);
+}
+
+.order-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid var(--line);
+}

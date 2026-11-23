@@ -1,0 +1,90 @@
+<!--index.wxml-->
+<navigation-bar title="共享盒子" back="{{false}}" color="black" background="#F5F6F8"></navigation-bar>
+
+<scroll-view class="page-scroll" scroll-y type="list">
+  <view class="page-pad">
+    <view class="hero">
+      <view class="hero-icon">
+        <text>📦</text>
+      </view>
+      <view class="hero-title">
+        <text>扫描盒身上的二维码</text>
+      </view>
+      <view class="hero-sub">
+        <text>扫码后识别盒子并立即开锁，电磁锁收回后即可拉开盒门</text>
+      </view>
+      <view class="btn block {{scanning ? 'disabled' : ''}}" hover-class="hover" bindtap="onScan">
+        <text>{{scanning ? '正在识别…' : '扫码开箱'}}</text>
+      </view>
+      <view class="btn ghost block skip" hover-class="hover" bindtap="onOpenVirtual">
+        <text>跳过扫码，控制这把锁</text>
+      </view>
+
+      <view class="manual">
+        <view class="manual-label">
+          <text>或手动输入盒子编号</text>
+        </view>
+        <view class="manual-row">
+          <input
+            class="manual-input"
+            type="text"
+            value="{{codeInput}}"
+            placeholder="例如 BOX1001"
+            placeholder-class="manual-placeholder"
+            confirm-type="done"
+            bindinput="onCodeInput"
+            bindconfirm="onSubmitCode"
+          />
+          <view class="btn small" hover-class="hover" bindtap="onSubmitCode">
+            <text>确定</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card entry" hover-class="hover" bindtap="goOrders">
+      <view class="col">
+        <view class="row">
+          <text class="entry-title">我的订单</text>
+        </view>
+        <view class="entry-sub">
+          <text>查看历史取货记录与开锁状态</text>
+        </view>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="section-title">
+      <text>附近的盒子</text>
+    </view>
+
+    <view wx:if="{{boxes.length === 0}}" class="empty">
+      <text class="empty-icon">📭</text>
+      <text class="muted">暂无可用盒子</text>
+    </view>
+
+    <view
+      wx:for="{{boxes}}"
+      wx:key="boxCode"
+      class="box-card"
+      hover-class="hover"
+      data-code="{{item.boxCode}}"
+      bindtap="openBoxByCode"
+    >
+      <view class="box-card-head">
+        <text class="box-card-name">{{item.name}}</text>
+        <text class="tag {{item.status === 'online' ? 'green' : 'gray'}}">
+          {{item.status === 'online' ? '可用' : '维护中'}}
+        </text>
+      </view>
+      <view class="box-card-sub">
+        <text>{{item.address}} · {{item.goodsCount}} 件商品</text>
+      </view>
+      <view class="box-card-code">
+        <text>编号 {{item.boxCode}}</text>
+      </view>
+    </view>
+
+    <view class="safe-bottom"></view>
+  </view>
+</scroll-view>

@@ -1,0 +1,134 @@
+/**index.wxss**/
+.page-pad {
+  padding: 24rpx 24rpx 0;
+}
+
+.hero {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 48rpx 32rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.hero-icon {
+  font-size: 96rpx;
+  line-height: 1;
+  text-align: center;
+}
+
+.hero-title {
+  margin-top: 24rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hero-sub {
+  margin: 12rpx 0 36rpx;
+  font-size: 26rpx;
+  color: var(--text-sub);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.skip {
+  margin-top: 20rpx;
+}
+
+.manual {
+  margin-top: 32rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid var(--line);
+}
+
+.manual-label {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  margin-bottom: 16rpx;
+}
+
+.manual-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.manual-input {
+  flex: 1;
+  min-width: 0;
+  height: 76rpx;
+  padding: 0 24rpx;
+  margin-right: 16rpx;
+  border-radius: 38rpx;
+  background-color: #f5f6f8;
+  font-size: 28rpx;
+  color: var(--text);
+}
+
+.manual-placeholder {
+  color: var(--text-weak);
+}
+
+.entry {
+  margin: 0 0 24rpx;
+  padding: 28rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.entry-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.arrow {
+  font-size: 44rpx;
+  color: var(--text-weak);
+  line-height: 1;
+}
+
+.section-title {
+  margin: 12rpx 0 16rpx;
+}
+
+.box-card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.box-card-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.box-card-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.box-card-sub {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.box-card-code {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: var(--text-weak);
+}

@@ -1,0 +1,195 @@
+/**app.wxss**/
+page {
+  --brand: #07c160;
+  --brand-deep: #06a552;
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --text: #17181a;
+  --text-sub: #8b9099;
+  --text-weak: #b4b8bf;
+  --line: #edeff2;
+  --danger: #fa5151;
+  --warning: #ff8f1f;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.page-scroll {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.page-pad {
+  padding: 0 24rpx;
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+  background-color: var(--card);
+  border-radius: 24rpx;
+  margin: 0 24rpx 24rpx;
+  padding: 28rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin: 12rpx 24rpx 16rpx;
+}
+
+.muted {
+  color: var(--text-sub);
+  font-size: 26rpx;
+}
+
+.weak {
+  color: var(--text-weak);
+  font-size: 24rpx;
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.divider {
+  height: 2rpx;
+  background-color: var(--line);
+  margin: 20rpx 0;
+}
+
+/* ---------- 行 ---------- */
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  background-color: var(--brand);
+  color: #ffffff;
+}
+
+.btn.block {
+  width: 100%;
+}
+
+.btn.ghost {
+  background-color: #ffffff;
+  color: var(--text);
+  border: 2rpx solid var(--line);
+}
+
+.btn.small {
+  height: 64rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  padding: 0 28rpx;
+}
+
+.btn.disabled {
+  background-color: #c8d9d0;
+  color: #ffffff;
+}
+
+.btn.hover {
+  opacity: 0.85;
+}
+
+/* ---------- 价格 ---------- */
+.price {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+  margin-right: 2rpx;
+}
+
+/* ---------- 标签 ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 34rpx;
+  padding: 0 12rpx;
+  border-radius: 6rpx;
+  font-size: 20rpx;
+  color: var(--warning);
+  background-color: rgba(255, 143, 31, 0.12);
+  margin-left: 8rpx;
+}
+
+.tag.gray {
+  color: var(--text-sub);
+  background-color: #f2f3f5;
+}
+
+.tag.green {
+  color: var(--brand-deep);
+  background-color: rgba(7, 193, 96, 0.12);
+}
+
+/* ---------- 空态 ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+
+.empty-icon {
+  font-size: 72rpx;
+  margin-bottom: 20rpx;
+}
+
+/* ---------- 底部安全区 ---------- */
+.safe-bottom {
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+}
